@@ -21,4 +21,10 @@ public abstract class Animal implements Runnable, Jumpable {
     public void setAge(int age) {
         this.age = age;
     }
+
+    public Animal(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
 }

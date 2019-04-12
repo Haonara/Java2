@@ -6,20 +6,15 @@ public class TournamentLauncher {
 
     public static void main(String[] args) {
 
-        Human h = new Human();
-        if (h.getSex() == Sex.FEMALE) {
+        Team team1 = new Team( "Team1");
+        team1.addMember(new Dog("Tuzik",5));
+        team1.addMember(new Cat("Murka",3));
+        team1.addMember(new Human("Vasya",15, Sex.MALE));
+        team1.addMember(new Dog("Bobik",4));
 
-        }
+        team1.info();
 
-        Animal[] animals = new Animal[5];
-
-        for (Animal animal : animals) {
-
-            if (animal instanceof Swimable) {
-                Swimable swimable = (Swimable) animal;
-                swimable.swim();
-            }
-        }
+        Course c=new Course("бег",500);
 
 
     }
