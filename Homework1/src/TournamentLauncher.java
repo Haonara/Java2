@@ -14,7 +14,10 @@ public class TournamentLauncher {
 
         team1.info();
 
-        Course c=new Course("бег",500);
+        Course c=new Course("Бег",500);
+        Cat cat=new Cat("Murka",3);
+
+        c.dolt(cat);
 
 
     }

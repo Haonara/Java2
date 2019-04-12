@@ -64,6 +64,14 @@ public class Team {
     }
 
 
+    public  void showResults(){
+        System.out.println("Результаты: ");
+        for (Animal animal:members) {
+
+
+        }
+
+    }
 
 
 
