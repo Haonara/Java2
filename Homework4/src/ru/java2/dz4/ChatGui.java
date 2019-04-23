@@ -4,15 +4,14 @@ import ru.java2.dz4.service.BaseService;
 
 import java.awt.BorderLayout;
 import java.awt.HeadlessException;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import java.util.Date;
 
 import javax.swing.*;
 
 public class ChatGui extends JFrame{
     BaseService baseService = new BaseService();
-    
+
     public ChatGui() throws HeadlessException
     {
         setTitle("Chat Frame");
@@ -30,6 +29,8 @@ public class ChatGui extends JFrame{
         m1.add(m12);
 
         JTextArea jTextArea = new JTextArea();
+        jTextArea.setLineWrap(true);
+        jTextArea.setWrapStyleWord(false);
 
 
         JPanel jPanel = new JPanel();
@@ -40,9 +41,18 @@ public class ChatGui extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                // baseService.execute();
-                //  new SimpleGui();
-                jTextArea.setText("ILNAZ" + new Date().toString() + ": HELLO !");
+                jTextArea.append(tf.getText()+System.lineSeparator());
+
+            }
+        });
+
+        tf.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                int key=e.getKeyCode();
+                if (key==KeyEvent.VK_ENTER){
+                    jTextArea.append(tf.getText()+System.lineSeparator());
+                }
             }
         });
 
