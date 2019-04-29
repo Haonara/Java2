@@ -5,14 +5,14 @@ import java.net.InetAddress;
 import java.net.Socket;
 
 public class Client {
-    
+
 
     public static void main(String[] args) {
         int port = 8888;
 
         try
         {
-            InetAddress inetAddress = InetAddress.getLocalHost(); //127.0.0.1
+            InetAddress inetAddress = InetAddress.getLocalHost();
             Socket socket = new Socket(inetAddress, port);
             System.out.println("We have the connection...");
             InputStream inputStream = socket.getInputStream();
@@ -23,11 +23,11 @@ public class Client {
             BufferedReader keyboard = new BufferedReader(new InputStreamReader(System.in));
             System.out.println("We are beginning.... Enter something....");
 
-
+            String msg;
 
             while(true)
             {
-                String msg = keyboard.readLine();
+                msg = keyboard.readLine();
                 dos.writeUTF(msg);
                 dos.flush();
                 String msgFromServer = dis.readUTF();
@@ -42,5 +42,7 @@ public class Client {
         }
 
     }
+
+
 
 }
