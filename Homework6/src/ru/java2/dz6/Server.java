@@ -4,7 +4,7 @@ import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-public class Server {
+public class Server extends Thread {
 
     public static void main(String[] args){
         int port=8888;
@@ -20,18 +20,40 @@ public class Server {
             DataInputStream dis=new DataInputStream(inputStream);
             DataOutputStream dos=new DataOutputStream(outputStream);
 
-            String msg;
             BufferedReader keyboard = new BufferedReader(new InputStreamReader(System.in));
 
-            while (true)
-            {
-                msg = dis.readUTF();
-                System.out.println("Client sent message. Message equals = " + msg);
-                String msgForClients = keyboard.readLine();
-                dos.writeUTF(msgForClients);
-                dos.flush();
-                System.out.println("Server waiting a new message....");
-            }
+            Thread receive = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    while(true) {
+                        try {
+                            System.out.println("Client sent message. Message equals = " + dis.readUTF());
+                        } catch (Exception e){
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            });
+
+            Thread send=new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    while(true) {
+                        try {
+                            String msgForClients = keyboard.readLine();
+                            dos.writeUTF(msgForClients);
+                            dos.flush();
+                            System.out.println("Server waiting a new message....");
+                        } catch (Exception e){
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            });
+
+            receive.start();
+            send.start();
+
 
         }catch(IOException e){
             System.out.println("Initialization error.");
